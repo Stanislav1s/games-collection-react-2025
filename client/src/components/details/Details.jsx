@@ -1,4 +1,15 @@
+import { useEffect, useState } from "react"
+import { useParams } from "react-router"
+
 export default function Details() {
+    const { gameId } = useParams()
+    const [game, setGame] = useState({})
+    useEffect(() => {
+        fetch(`http://localhost:3030/jsonstore/games/${gameId}/details`)
+            .then(response => response.json())
+            .then(result => setGame(result))
+            .catch(err => alert(err.message))
+    }, [gameId])
     return (
         <section id="game-details">
             <h1>Game Details</h1>
@@ -10,14 +21,14 @@ export default function Details() {
                         alt="Elden Ring Cover Art"
                     />
                     <div className="meta-info">
-                        <h1 className="game-name">Elden Ring</h1>
+                        <h1 className="game-name">{game.title}</h1>
                         <p className="data-row">
                             <span className="label">Genre:</span>
-                            <span className="value">Action RPG</span>
+                            <span className="value">{game.genre}</span>
                         </p>
                         <p className="data-row">
                             <span className="label">Active Players:</span>
-                            <span className="value">100000</span>
+                            <span className="value">{game.players}</span>
                         </p>
                         <p className="data-row">
                             <span className="label">Release Date:</span>
