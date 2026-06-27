@@ -15,11 +15,7 @@ export default function Details() {
       <h1>Game Details</h1>
       <div className="info-section">
         <div className="header-and-image">
-          <img
-            className="game-img"
-            src={game.imgUrl}
-            alt="Elden Ring Cover Art"
-          />
+          <img className="game-img" src={game.imgUrl} alt={game.title} />
           <div className="meta-info">
             <h1 className="game-name">{game.title}</h1>
             <p className="data-row">
