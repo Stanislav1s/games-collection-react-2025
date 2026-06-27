@@ -10,6 +10,16 @@ export default function Details() {
       .then((result) => setGame(result))
       .catch((err) => alert(err.message));
   }, [gameId]);
+  const deleteHandler = async () => {
+    try {
+      await request(`/jsonstore/recipes/${game._id}`, "DELETE");
+      alert("Game deleted successfully");
+      navigate("/");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <section id="game-details">
       <h1>Game Details</h1>
