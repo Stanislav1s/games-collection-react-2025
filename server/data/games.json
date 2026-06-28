@@ -5,7 +5,7 @@
     "genre": "Open World",
     "players": 32000,
     "date": "2015-05-19",
-    "imageUrl": "/images/witcher.png",
+    "imageUrl": "./images/witcher.png",
     "summary": "A story-driven, open world fantasy RPG. Play as Geralt of Rivia, a monster slayer for hire, who must find the Child of Prophecy in a vast, war-torn world. The game is known for its morally gray choices, mature storyline, and expansive world exploration.",
     "_createdOn": 1617194350000
   },
@@ -15,7 +15,7 @@
     "genre": "Action RPG",
     "players": 105000,
     "date": "2022-02-25",
-    "imageUrl": "/images/elden ring.png",
+    "imageUrl": "./images/elden ring.png",
     "summary": "A monumental fantasy action RPG developed by FromSoftware and Bandai Namco. Set in the Lands Between, players embark on an epic quest to become the Elden Lord, exploring a vast open world designed by Hidetaka Miyazaki, with worldbuilding contributed by fantasy author George R. R. Martin.",
     "_createdOn": 1645708800000
   },
@@ -25,7 +25,7 @@
     "genre": "Sandbox",
     "players": 1400000,
     "date": "2011-11-18",
-    "imageUrl": "/images/minecraft.png",
+    "imageUrl": "./images/minecraft.png",
     "summary": "Minecraft is a sandbox video game where players explore a blocky, procedurally generated 3D world with infinite terrain. Players may discover and extract raw materials, craft tools and items, and build structures, earthworks and simple machines.",
     "_createdOn": 1617194450000
   },
@@ -35,7 +35,7 @@
     "genre": "Action RPG",
     "players": 85000,
     "date": "2020-12-10",
-    "imageUrl": "/images/cyberpunk.png",
+    "imageUrl": "./images/cyberpunk.png",
     "summary": "An open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality.",
     "_createdOn": 1607558400000
   }

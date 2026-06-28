@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
+import useRequest from "../../hooks/useRequest.js";
 
 export default function Details() {
+  const { request } = useRequest();
+  const navigate = useNavigate();
   const { gameId } = useParams();
   const [game, setGame] = useState({});
   useEffect(() => {
@@ -11,8 +14,9 @@ export default function Details() {
       .catch((err) => alert(err.message));
   }, [gameId]);
   const deleteHandler = async () => {
+    if (!window.confirm("Are you sure you want to delete this game?")) return;
     try {
-      await request(`/jsonstore/recipes/${game._id}`, "DELETE");
+      await request(`/jsonstore/games/${game._id}`, "DELETE");
       alert("Game deleted successfully");
       navigate("/");
     } catch (err) {
@@ -25,7 +29,7 @@ export default function Details() {
       <h1>Game Details</h1>
       <div className="info-section">
         <div className="header-and-image">
-          <img className="game-img" src={game.imgUrl} alt={game.title} />
+          <img className="game-img" src={game.imageUrl} alt={game.title} />
           <div className="meta-info">
             <h1 className="game-name">{game.title}</h1>
             <p className="data-row">
@@ -51,7 +55,7 @@ export default function Details() {
           <a href="#" className="button">
             Edit
           </a>
-          <a href="#" className="button">
+          <a href="#" className="button" onClick={deleteHandler}>
             Delete
           </a>
         </div>
