@@ -5,8 +5,9 @@ import Header from "./components/header/Header.jsx";
 import Home from "./components/home/Home.jsx";
 import Catalog from "./components/catalog/Catalog.jsx";
 import Details from "./components/details/Details.jsx";
-// import Login from "./components/login/Login.jsx";
+import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
+import Logout from "./components/logout/Logout.jsx";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
 
       <Footer />
