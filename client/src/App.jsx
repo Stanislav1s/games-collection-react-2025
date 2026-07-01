@@ -1,17 +1,15 @@
-import { Route, Routes } from "react-router"
+import { Route, Routes } from "react-router";
 
-import Footer from "./components/footer/Footer.jsx"
-import Header from "./components/header/Header.jsx"
-import Home from "./components/home/Home.jsx"
-import Catalog from "./components/catalog/Catalog.jsx"
-import Details from "./components/details/Details.jsx"
-
-
+import Footer from "./components/footer/Footer.jsx";
+import Header from "./components/header/Header.jsx";
+import Home from "./components/home/Home.jsx";
+import Catalog from "./components/catalog/Catalog.jsx";
+import Details from "./components/details/Details.jsx";
+// import Login from "./components/login/Login.jsx";
+import Register from "./components/register/Register.jsx";
 
 function App() {
-
   return (
-
     <>
       <Header />
 
@@ -19,14 +17,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
+        <Route path="/register" element={<Register />} />
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
-
 
       <Footer />
     </>
-
-
-  )
+  );
 }
 
-export default App
+export default App;
