@@ -1,4 +1,20 @@
+import { useState } from "react";
+
 export default function Edit() {
+  const initialValues = {
+    title: "",
+    genre: "",
+    players: "",
+    imageUrl: "",
+    summary: "",
+  };
+  const [values, setValues] = useState(initialValues);
+  const changeHandler = (e) => {
+    setValues((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <section id="edit-page">
       <form id="add-new-game">
@@ -9,7 +25,9 @@ export default function Edit() {
             <input
               type="text"
               id="gameName"
-              name="gameName"
+              name="title"
+              onChange={changeHandler}
+              value={initialValues.title}
               placeholder="Enter game title..."
             />
           </div>
@@ -19,6 +37,8 @@ export default function Edit() {
               type="text"
               id="genre"
               name="genre"
+              onChange={changeHandler}
+              value={initialValues.genre}
               placeholder="Enter game genre..."
             />
           </div>
@@ -27,7 +47,9 @@ export default function Edit() {
             <input
               type="number"
               id="activePlayers"
-              name="activePlayers"
+              name="players"
+              onChange={changeHandler}
+              value={initialValues.players}
               min={0}
               placeholder={0}
             />
@@ -42,6 +64,8 @@ export default function Edit() {
               type="text"
               id="imageUrl"
               name="imageUrl"
+              onChange={changeHandler}
+              value={initialValues.imageUrl}
               placeholder="Enter image URL..."
             />
           </div>
@@ -50,9 +74,10 @@ export default function Edit() {
             <textarea
               name="summary"
               id="summary"
-              rows={5}
+              onChange={changeHandler}
+              value={initialValues.summary}
+              rows="{5}"
               placeholder="Write a brief summary..."
-              defaultValue={""}
             />
           </div>
           <input
