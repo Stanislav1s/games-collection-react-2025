@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import useRequest from "../../hooks/useRequest.js";
 
 export default function Edit() {
   const initialValues = {
@@ -8,6 +10,8 @@ export default function Edit() {
     imageUrl: "",
     summary: "",
   };
+  const { gameId } = useParams();
+  const { request } = useRequest();
   const [values, setValues] = useState(initialValues);
   const changeHandler = (e) => {
     setValues((state) => ({
@@ -15,6 +19,11 @@ export default function Edit() {
       [e.target.name]: e.target.value,
     }));
   };
+  useEffect(() => {
+    request(`/jsonstore/games/${gameId}`)
+      .then((result) => setValues(result))
+      .catch((err) => alert(err.message));
+  }, [gameId]);
   return (
     <section id="edit-page">
       <form id="add-new-game">
@@ -27,7 +36,7 @@ export default function Edit() {
               id="gameName"
               name="title"
               onChange={changeHandler}
-              value={initialValues.title}
+              value={values.title}
               placeholder="Enter game title..."
             />
           </div>
@@ -38,7 +47,7 @@ export default function Edit() {
               id="genre"
               name="genre"
               onChange={changeHandler}
-              value={initialValues.genre}
+              value={values.genre}
               placeholder="Enter game genre..."
             />
           </div>
@@ -49,7 +58,7 @@ export default function Edit() {
               id="activePlayers"
               name="players"
               onChange={changeHandler}
-              value={initialValues.players}
+              value={values.players}
               min={0}
               placeholder={0}
             />
@@ -65,7 +74,7 @@ export default function Edit() {
               id="imageUrl"
               name="imageUrl"
               onChange={changeHandler}
-              value={initialValues.imageUrl}
+              value={values.imageUrl}
               placeholder="Enter image URL..."
             />
           </div>
@@ -75,7 +84,7 @@ export default function Edit() {
               name="summary"
               id="summary"
               onChange={changeHandler}
-              value={initialValues.summary}
+              value={values.summary}
               rows="{5}"
               placeholder="Write a brief summary..."
             />
