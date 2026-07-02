@@ -3,7 +3,7 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <Link className="home" to="/">
+        <Link to="/" className="home">
           {" "}
           <img src="./images/logo.png" alt="logo" />
         </Link>
