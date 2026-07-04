@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useRequest from "../../hooks/useRequest.js";
 
 export default function Edit() {
@@ -10,6 +10,7 @@ export default function Edit() {
     imageUrl: "",
     summary: "",
   };
+  const navigate = useNavigate();
   const { gameId } = useParams();
   const { request } = useRequest();
   const [values, setValues] = useState(initialValues);
@@ -24,9 +25,17 @@ export default function Edit() {
       .then((result) => setValues(result))
       .catch((err) => alert(err.message));
   }, [gameId]);
+  const editGameHandler = async () => {
+    try {
+      await request(`/jsonstore/games/${gameId}`, "PUT", values);
+    } catch (err) {
+      alert(err.message);
+    }
+    navigate(`/games/${gameId}/details`);
+  };
   return (
     <section id="edit-page">
-      <form id="add-new-game">
+      <form id="add-new-game" action={editGameHandler}>
         <div className="container">
           <h1>Edit Game</h1>
           <div className="form-group-half">
