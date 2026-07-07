@@ -7,8 +7,8 @@ export default function DetailsComments() {
   const { gameId } = useParams();
   const [comments, setComments] = useState([]);
   useEffect(() => {
-    request("/comments").then((result) => {
-      const gameComments = result.filter(
+    request("/jsonstore/comments").then((result) => {
+      const gameComments = Object.values(result).filter(
         (comment) => comment.gameId === gameId
       );
       setComments(gameComments);

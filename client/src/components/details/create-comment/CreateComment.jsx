@@ -10,8 +10,8 @@ export default function CreateComment() {
     setComment(e.target.value);
   };
   const submitHandler = async () => {
-    await request("/comments", "POST", {
-      //todo add AUTHOR
+    await request("/jsonstore/comments", "POST", {
+      email: "email",
       message: comment,
       gameId,
     });
@@ -26,11 +26,7 @@ export default function CreateComment() {
           value={comment}
           placeholder="Comment......"
         />
-        <input
-          className="btn submit"
-          type="submit"
-          defaultValue="Add Comment"
-        />
+        <input className="btn submit" type="submit" value="Add Comment" />
       </form>
     </article>
   );
