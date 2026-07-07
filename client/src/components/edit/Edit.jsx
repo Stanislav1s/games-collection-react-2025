@@ -28,10 +28,10 @@ export default function Edit() {
   const editGameHandler = async () => {
     try {
       await request(`/jsonstore/games/${gameId}`, "PUT", values);
+      navigate(`/games/${gameId}/details`);
     } catch (err) {
       alert(err.message);
     }
-    navigate(`/games/${gameId}/details`);
   };
   return (
     <section id="edit-page">
