@@ -2,7 +2,7 @@ import { useState } from "react";
 import useRequest from "../../../hooks/useRequest.js";
 import { useParams } from "react-router";
 
-export default function CreateComment() {
+export default function CreateComment({ onCreate }) {
   const { gameId } = useParams();
   const { request } = useRequest();
   const [comment, setComment] = useState("");
@@ -10,11 +10,16 @@ export default function CreateComment() {
     setComment(e.target.value);
   };
   const submitHandler = async () => {
-    await request("/jsonstore/comments", "POST", {
-      email: "email",
-      message: comment,
-      gameId,
-    });
+    try {
+      await request("/jsonstore/comments", "POST", {
+        email: "email",
+        message: comment,
+        gameId,
+      });
+      onCreate();
+    } catch (err) {
+      alert(err.message);
+    }
   };
   return (
     <article className="create-comment">
