@@ -1,21 +1,39 @@
 import { useNavigate } from "react-router";
 import useRequest from "../../hooks/useRequest.js";
+import { useEffect, useState } from "react";
 
 export default function GameCreate() {
   const navigate = useNavigate();
   const { request } = useRequest();
+  const [imageUpload, setImageUpload] = useState(false);
+  const [imageUrlPreview, setImageUrlPreview] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(imageUrlPreview);
+      setImageUrlPreview(null);
+    };
+  }, [imageUpload]);
   const createGameHandler = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
 
-    const data = Object.fromEntries(formData);
+    const { image, ...data } = Object.fromEntries(formData);
 
     data.players = Number(data.players);
     data._createdOn = Date.now();
 
     await request("/jsonstore/games", "POST", data);
     navigate("/catalog");
+  };
+  const imageUploadClickHandler = () => {
+    setImageUpload((state) => !state);
+  };
+  const imageChangeHandler = (e) => {
+    const image = e.target.files[0];
+    const imageUrl = URL.createObjectURL(image);
+    setImageUrlPreview(imageUrl);
   };
   return (
     <section id="add-page">
@@ -55,13 +73,35 @@ export default function GameCreate() {
             <input type="date" id="releaseDate" name="date" />
           </div>
           <div className="form-group-full">
-            <label htmlFor="imageUrl">Image URL:</label>
-            <input
-              type="text"
-              id="imageUrl"
-              name="imageUrl"
-              placeholder="Enter image URL..."
-            />
+            <label htmlFor="imageUrl">
+              {imageUpload ? "Image Upload:" : "Image URL:"}
+            </label>
+            <button
+              type="button"
+              className="details-button"
+              onClick={imageUploadClickHandler}
+            >
+              {imageUpload ? "Image Url" : "Image Upload"}
+            </button>
+            {imageUpload ? (
+              <input
+                type="file"
+                id="image"
+                name="image"
+                placeholder="Upload image..."
+                onChange={imageChangeHandler}
+              />
+            ) : (
+              <input
+                type="text"
+                id="image"
+                name="image"
+                placeholder="Enter image URL..."
+              />
+            )}
+            {imageUrlPreview && (
+              <img src={imageUrlPreview} alt="preview image"></img>
+            )}
           </div>
           <div className="form-group-full">
             <label htmlFor="summary">Summary:</label>
