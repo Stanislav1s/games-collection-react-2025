@@ -9,6 +9,7 @@ import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import Edit from "./components/edit/Edit.jsx";
+import GameCreate from "./components/game-create/GameCreate.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/games/:gameId/details" element={<Details />} />
         <Route path="/games/:gameId/edit" element={<Edit />} />
+        <Route path="/games/create" element={<GameCreate />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
