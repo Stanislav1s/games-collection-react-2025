@@ -17,6 +17,7 @@ export default function CreateComment({ onCreate }) {
         gameId,
       });
       onCreate();
+      setComment("");
     } catch (err) {
       alert(err.message);
     }
