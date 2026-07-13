@@ -8,13 +8,13 @@ export default function Register() {
   const { registerHandler } = useContext(UserContext);
 
   const registerSubmitHandler = async (values) => {
-    const { email, password, confirmPass } = values;
+    const { email, password, rePass } = values;
 
     if (!email || !password) {
       alert("Email and password are required!");
       return;
     }
-    if (password !== confirmPass) {
+    if (password !== rePass) {
       alert("password missmatch");
       return;
     }
@@ -28,7 +28,7 @@ export default function Register() {
   const { register, formAction } = useForm(registerSubmitHandler, {
     email: "",
     password: "",
-    confirmPass: "",
+    rePass: "",
   });
   return (
     <section id="register-page" className="content auth">
@@ -55,10 +55,10 @@ export default function Register() {
           <label htmlFor="con-pass">Confirm Password:</label>
           <input
             type="password"
-            name="confirm-password"
-            id="confirm-password"
+            name="rePass"
+            id="rePass"
             placeholder="Repeat Password"
-            {...register("confirmPass")}
+            {...register("rePass")}
           />
           <div>
             <button>
