@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-
+import { useContext } from "react";
 import Footer from "./components/footer/Footer.jsx";
 import Header from "./components/header/Header.jsx";
 import Home from "./components/home/Home.jsx";
@@ -10,8 +10,10 @@ import Register from "./components/register/Register.jsx";
 import Logout from "./components/logout/Logout.jsx";
 import Edit from "./components/edit/Edit.jsx";
 import GameCreate from "./components/game-create/GameCreate.jsx";
+import UserContext from "./contexts/UserContext.jsx";
 
 function App() {
+  const { user } = useContext(UserContext);
   return (
     <>
       <Header />
@@ -19,7 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
-        <Route path="/games/:gameId/details" element={<Details />} />
+        <Route
+          path="/games/:gameId/details"
+          element={<Details user={user} />}
+        />
         <Route path="/games/:gameId/edit" element={<Edit />} />
         <Route path="/games/create" element={<GameCreate />} />
         <Route path="/register" element={<Register />} />

@@ -23,6 +23,7 @@ export function UserProvider({ children }) {
     const newUser = { email, password };
 
     const result = await request("/users/register", "POST", newUser);
+    console.log(result);
 
     setUser(result);
   };

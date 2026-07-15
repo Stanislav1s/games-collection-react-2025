@@ -19,7 +19,10 @@ export default function Register() {
       return;
     }
     try {
-      await registerHandler(email, password);
+      const res = await registerHandler(email, password);
+      console.log("submit fired");
+      console.log(res);
+
       navigate("/");
     } catch (err) {
       alert(err.message);
@@ -32,7 +35,7 @@ export default function Register() {
   });
   return (
     <section id="register-page" className="content auth">
-      <form action={formAction} id="register">
+      <form id="register" action={formAction}>
         <div className="container">
           <div className="brand-logo" />
           <h1>Register</h1>
@@ -61,9 +64,11 @@ export default function Register() {
             {...register("rePass")}
           />
           <div>
-            <button>
-              className="btn submit" type="submit" defaultValue="Register"
-            </button>
+            <button
+              lassName="btn submit"
+              type="submit"
+              value="Register"
+            ></button>
           </div>
         </div>
       </form>
