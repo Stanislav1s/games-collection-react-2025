@@ -7,6 +7,7 @@ export default function useRequest(url, initialState) {
   const { user, isAuthenticated } = useContext(UserContext);
   const [data, setData] = useState(initialState);
 
+  // TODO Fix infinite loop problem on mount request with useEffect
   const request = async (url, method, data, config = {}) => {
     let options = {};
 
