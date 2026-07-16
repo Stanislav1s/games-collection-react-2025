@@ -1,10 +1,12 @@
 import { useState } from "react";
 import useRequest from "../../../hooks/useRequest.js";
 import { useParams } from "react-router";
+import { useUserContext } from "../../../contexts/UserContext.jsx";
 
 export default function CreateComment({ onCreate }) {
   const { gameId } = useParams();
   const { request } = useRequest();
+  const { email } = useUserContext();
   const [comment, setComment] = useState("");
   const changeHandler = (e) => {
     setComment(e.target.value);
@@ -12,7 +14,7 @@ export default function CreateComment({ onCreate }) {
   const submitHandler = async () => {
     try {
       await request("/jsonstore/comments", "POST", {
-        email: "email",
+        email: email,
         message: comment,
         gameId,
       });
