@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import useRequest from "../../hooks/useRequest.js";
 import CreateComment from "./create-comment/CreateComment.jsx";
 import DetailsComments from "./details-comments/detailsComments.jsx";
 
 export default function Details() {
-  const { request } = useRequest();
   const navigate = useNavigate();
   const { gameId } = useParams();
-  const [game, setGame] = useState({});
   const [refresh, setRefresh] = useState(false);
-  useEffect(() => {
-    fetch(`http://localhost:3030/jsonstore/games/${gameId}`)
-      .then((response) => response.json())
-      .then((result) => setGame(result))
-      .catch((err) => alert(err.message));
-  }, [gameId]);
+  const { data: game, request } = useRequest(`/data/games/${gameId}`, {});
+  // useEffect(() => {
+  //   fetch(`http://localhost:3030/jsonstore/games/${gameId}`)
+  //     .then((response) => response.json())
+  //     .then((result) => setGame(result))
+  //     .catch((err) => alert(err.message));
+  // }, [gameId]);
   const deleteHandler = async () => {
     if (!window.confirm("Are you sure you want to delete this game?")) return;
     try {
-      await request(`/jsonstore/games/${game._id}`, "DELETE");
+      await request(`/data/games/${gameId}`, "DELETE");
       alert("Game deleted successfully");
       navigate("/");
     } catch (err) {

@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { BASEURL } from "../catalog/Catalog.jsx";
 import Game from "../game/Game.jsx";
 import useRequest from "../../hooks/useRequest.js";
 
