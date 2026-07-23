@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import { BASEURL } from "../catalog/Catalog.jsx";
 import Game from "../game/Game.jsx";
+import useRequest from "../../hooks/useRequest.js";
 
 export default function Home() {
-  const [latestGames, setLatestGames] = useState([]);
-  useEffect(() => {
-    fetch(BASEURL)
-      .then((response) => response.json())
-      .then((result) => {
-        const resultGames = Object.values(result)
-          .sort((a, b) => b._createdOn - a._createdOn)
-          .slice(0, 3);
-
-        setLatestGames(resultGames);
-      });
-  }, []);
+  const { data: latestGames } = useRequest(
+    `/data/games?sortBy=_createdOn%20desc&pageSize=3`,
+    []
+  );
   return (
     <section id="welcome-world">
       <div className="welcome-message">
