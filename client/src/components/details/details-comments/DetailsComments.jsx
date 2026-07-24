@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useRequest from "../../../hooks/useRequest.js";
 
 export default function DetailsComments({ refresh }) {
   const { request } = useRequest();
   const { gameId } = useParams();
-  const [comments, setComments] = useState([]);
-  useEffect(() => {
-    request("/jsonstore/comments").then((result) => {
-      const gameComments = Object.values(result).filter(
-        (comment) => comment.gameId === gameId
-      );
-      setComments(gameComments);
-    });
-  }, [gameId, refresh]);
+
+  const urlParams = new URLSearchParams({
+    where: `gameId="${gameId}"`,
+    load: "author=_ownerId:users",
+  });
+  const { data: comments } = request(
+    `/data/comments?${(urlParams.toString(), [])}`
+  );
   return (
     <div className="details-comments">
       <h2>Comments:</h2>
