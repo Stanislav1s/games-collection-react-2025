@@ -3,8 +3,10 @@ import { useParams, useNavigate, Link } from "react-router";
 import useRequest from "../../hooks/useRequest.js";
 import CreateComment from "./create-comment/CreateComment.jsx";
 import DetailsComments from "./details-comments/detailsComments.jsx";
+import { useUserContext } from "../../contexts/UserContext.jsx";
 
 export default function Details() {
+  const { user, isAuthenticated } = useUserContext();
   const navigate = useNavigate();
   const { gameId } = useParams();
   const [refresh, setRefresh] = useState(false);
@@ -55,15 +57,17 @@ export default function Details() {
             <p className="text-summary">{game.summary}</p>
           </div>
         </div>
-        {/* Edit/Delete buttons ( Only for creator of this game )  */}
-        <div className="buttons">
-          <Link to={`/games/${gameId}/edit`} className="button">
-            Edit
-          </Link>
-          <button className="button" onClick={deleteGameHandler}>
-            Delete
-          </button>
-        </div>
+        {isAuthenticated && (
+          <div className="buttons">
+            <Link to={`/games/${gameId}/edit`} className="button">
+              Edit
+            </Link>
+            <button className="button" onClick={deleteGameHandler}>
+              Delete
+            </button>
+          </div>
+        )}
+
         <DetailsComments refresh={refresh} />
       </div>
       <CreateComment onCreate={refreshHandler} />
