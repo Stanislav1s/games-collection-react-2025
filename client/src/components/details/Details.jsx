@@ -9,20 +9,21 @@ export default function Details() {
   const { gameId } = useParams();
   const [refresh, setRefresh] = useState(false);
   const { data: game, request } = useRequest(`/data/games/${gameId}`, {});
-  // useEffect(() => {
-  //   fetch(`http://localhost:3030/jsonstore/games/${gameId}`)
-  //     .then((response) => response.json())
-  //     .then((result) => setGame(result))
-  //     .catch((err) => alert(err.message));
-  // }, [gameId]);
-  const deleteHandler = async () => {
-    if (!window.confirm("Are you sure you want to delete this game?")) return;
+  const deleteGameHandler = async () => {
+    const isConfirmed = confirm(
+      `Are you sure you want to delete game: ${game.title}`
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await request(`/data/games/${gameId}`, "DELETE");
-      alert("Game deleted successfully");
-      navigate("/");
+
+      navigate("/catalog");
     } catch (err) {
-      alert(err.message);
+      alert("Unable to delete game: ", err.message);
     }
   };
   const refreshHandler = () => {
@@ -59,7 +60,7 @@ export default function Details() {
           <Link to={`/games/${gameId}/edit`} className="button">
             Edit
           </Link>
-          <button className="button" onClick={deleteHandler}>
+          <button className="button" onClick={deleteGameHandler}>
             Delete
           </button>
         </div>
