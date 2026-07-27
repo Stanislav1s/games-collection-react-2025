@@ -70,7 +70,9 @@ export default function Details() {
 
         <DetailsComments refresh={refresh} />
       </div>
-      <CreateComment onCreate={refreshHandler} />
+      {isAuthenticated && (
+        <CreateComment user={user} onCreate={refreshHandler} />
+      )}
     </section>
   );
 }
