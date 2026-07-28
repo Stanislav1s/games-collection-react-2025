@@ -4,9 +4,12 @@ import useRequest from "../../hooks/useRequest.js";
 import useForm from "../../hooks/useForm.js";
 
 export default function Edit() {
+  const navigate = useNavigate();
+  const { gameId } = useParams();
+  const { request } = useRequest();
   const editGameHandler = async (values) => {
     try {
-      await request(`/jsonstore/games/${gameId}`, "PUT", values);
+      await request(`/data/games/${gameId}`, "PUT", values);
       navigate(`/games/${gameId}/details`);
     } catch (err) {
       alert(err.message);
@@ -21,9 +24,6 @@ export default function Edit() {
     summary: "",
   });
 
-  const navigate = useNavigate();
-  const { gameId } = useParams();
-  const { request } = useRequest();
   useEffect(() => {
     request(`/data/games/${gameId}`)
       .then((result) => {
