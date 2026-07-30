@@ -1,17 +1,4 @@
-import { useParams } from "react-router";
-import useRequest from "../../../hooks/useRequest.js";
-
-export default function DetailsComments() {
-  const { gameId } = useParams();
-
-  const urlParams = new URLSearchParams({
-    where: `gameId="${gameId}"`,
-    load: "author=_ownerId:users",
-  });
-  const { data: comments } = useRequest(
-    `/data/comments?${urlParams.toString()}`,
-    []
-  );
+export default function DetailsComments({ comments }) {
   return (
     <div className="details-comments">
       <h2>Comments:</h2>

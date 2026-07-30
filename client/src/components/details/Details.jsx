@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import useRequest from "../../hooks/useRequest.js";
 import CreateComment from "./create-comment/CreateComment.jsx";
@@ -6,11 +5,18 @@ import DetailsComments from "./details-comments/detailsComments.jsx";
 import { useUserContext } from "../../contexts/UserContext.jsx";
 
 export default function Details() {
-  const { user, isAuthenticated } = useUserContext();
   const navigate = useNavigate();
   const { gameId } = useParams();
-  const [refresh, setRefresh] = useState(false);
+  const { user, isAuthenticated } = useUserContext();
   const { data: game, request } = useRequest(`/data/games/${gameId}`, {});
+  const urlParams = new URLSearchParams({
+    where: `gameId="${gameId}"`,
+    load: "author=_ownerId:users",
+  });
+  const { data: comments, setData: setComments } = useRequest(
+    `/data/comments?${urlParams.toString()}`,
+    []
+  );
   const deleteGameHandler = async () => {
     const isConfirmed = confirm(
       `Are you sure you want to delete game: ${game.title}`
@@ -28,8 +34,11 @@ export default function Details() {
       alert("Unable to delete game: ", err.message);
     }
   };
-  const refreshHandler = () => {
-    setRefresh((state) => !state);
+  const createdCommentHandler = (createdComment) => {
+    setComments((prevComments) => [
+      ...prevComments,
+      { ...createdComment, author: user },
+    ]);
   };
   return (
     <section id="game-details">
@@ -68,10 +77,10 @@ export default function Details() {
           </div>
         )}
 
-        <DetailsComments refresh={refresh} />
+        <DetailsComments comments={comments} />
       </div>
       {isAuthenticated && (
-        <CreateComment user={user} onCreate={refreshHandler} />
+        <CreateComment user={user} onCreate={createdCommentHandler} />
       )}
     </section>
   );

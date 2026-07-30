@@ -8,11 +8,11 @@ export default function CreateComment({ onCreate }) {
 
   const submitHandler = async ({ comment }) => {
     try {
-      await request("/data/comments", "POST", {
+      const createdComment = await request("/data/comments", "POST", {
         message: comment,
         gameId,
       });
-      onCreate();
+      onCreate(createdComment);
     } catch (err) {
       alert(err.message);
     }
