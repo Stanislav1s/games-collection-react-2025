@@ -6,7 +6,7 @@ React + Vite single-page application (SPA) and NodeJS backend (Softuni practice 
 - Language(s): JavaScript (client + server), HTML, CSS
 - Framework / runtime:
   - Client: React 19 + Vite
-  - Server: plain Node.js HTTP server (single-file server at server/server.js)
+  - Server: Node.js HTTP server (single-file server at server/server.js) - Softuni Practice Server
 - Notable libraries:
   - react, react-dom, react-router (client)
   - vite and @vitejs/plugin-react (dev/build tooling)
@@ -14,6 +14,12 @@ React + Vite single-page application (SPA) and NodeJS backend (Softuni practice 
 
 ---
 ## Getting started
-1 Clone the repo.
-3 Navigate to '/server' and run 'node server.js'
-3 In second terminal run 'npm i' - to install dependencies, and then 'npm run dev' to run the frontend
+   1. Clone the repo. 
+   2. Navigate to '/server' and run 'node server.js'.
+   3. In second terminal run 'npm i' - to install dependencies, and then 'npm run dev' to run the frontend.
+      
+## Additional info
+You can log in with test data:    
+ user: peter@abv.bg    
+ password: 123456  
+or you can register your own.  
