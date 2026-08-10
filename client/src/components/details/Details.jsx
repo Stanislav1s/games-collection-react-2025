@@ -3,6 +3,7 @@ import useRequest from "../../hooks/useRequest.js";
 import CreateComment from "./create-comment/CreateComment.jsx";
 import DetailsComments from "./details-comments/detailsComments.jsx";
 import { useUserContext } from "../../contexts/UserContext.jsx";
+import { useOptimistic } from "react";
 
 export default function Details() {
   const navigate = useNavigate();
@@ -16,6 +17,17 @@ export default function Details() {
   const { data: comments, setData: setComments } = useRequest(
     `/data/comments?${urlParams.toString()}`,
     []
+  );
+  const [optimisticComments, dispatchOptimisticComments] = useOptimistic(
+    comments,
+    (state, action) => {
+      switch (action.type) {
+        case "ADD_COMMENT":
+          return [...state, action.payload];
+        default:
+          return state;
+      }
+    }
   );
   const deleteGameHandler = async () => {
     const isConfirmed = confirm(
@@ -33,6 +45,12 @@ export default function Details() {
     } catch (err) {
       alert("Unable to delete game: ", err.message);
     }
+  };
+  const createStartCommentHandler = (newComment) => {
+    dispatchOptimisticComments({
+      type: "ADD_COMMENT",
+      payload: { ...newComment, author: user },
+    });
   };
   const createdCommentHandler = (createdComment) => {
     setComments((prevComments) => [
@@ -77,10 +95,14 @@ export default function Details() {
           </div>
         )}
 
-        <DetailsComments comments={comments} />
+        <DetailsComments comments={optimisticComments} />
       </div>
       {isAuthenticated && (
-        <CreateComment user={user} onCreate={createdCommentHandler} />
+        <CreateComment
+          user={user}
+          onCreateStart={createStartCommentHandler}
+          onCreateEnd={createdCommentHandler}
+        />
       )}
     </section>
   );
