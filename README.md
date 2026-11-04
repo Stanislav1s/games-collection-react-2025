@@ -49,6 +49,7 @@ A React + Vite single-page application with a Node.js backend, built as a projec
 | Role | Email          | Password |
 | ---- | -------------- | -------- |
 | User | `peter@abv.bg` | `123456` |
+| Admin |`admin@abv.bg` | `admin`  |
 
 You can also register your own account.
 
