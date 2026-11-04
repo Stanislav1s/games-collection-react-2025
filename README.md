@@ -1,25 +1,61 @@
-# Games Collection — React Course Workshop
+# 🎮 Games Collection
 
-React + Vite single-page application (SPA) and NodeJS backend (Softuni practice server) used for a workshop/course. It demonstrates a games catalog with authentication, CRUD operations, an admin panel and seed data so you can run and experiment locally.
+A React + Vite single-page application with a Node.js backend, built as a project for the SoftUni React course. It's a games catalog with user authentication, CRUD operations and an admin panel, with seed data included so you can run it locally right away.
 
-## Stack
-- Language(s): JavaScript (client + server), HTML, CSS
-- Framework / runtime:
-  - Client: React 19 + Vite
-  - Server: Node.js HTTP server (single-file server at server/server.js) - Softuni Practice Server
-- Notable libraries:
-  - react, react-dom, react-router (client)
-  - vite and @vitejs/plugin-react (dev/build tooling)
-  - lightweight in-memory storage + simple auth implemented inside server/server.js (no external DB)
+## Features
 
----
-## Getting started
-   1. Clone the repo. 
-   2. Navigate to '/server' and run 'node server.js'.
-   3. In second terminal run 'npm i' - to install dependencies, and then 'npm run dev' to run the frontend.
-      
-## Additional info
-You can log in with test data:    
- user: peter@abv.bg    
- password: 123456  
-or you can register your own.  
+- Browse the games catalog and view game details
+- Register, log in and log out
+- Create, edit and delete games (CRUD)
+- Admin panel for managing content
+- Optimistic comments for every game
+
+## Tech Stack
+
+| Area      | Technology                                                                                                                               |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend  | React 19, React Router, Vite (`@vitejs/plugin-react`)                                                                                    |
+| Backend   | Node.js, [SoftUni Practice Server](https://github.com/softuni-practice-server/softuni-practice-server) (single file: `server/server.js`) |
+| Languages | JavaScript, HTML, CSS                                                                                                                    |
+
+## Getting Started
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Stanislav1s/games-collection-react-2025.git
+   cd games-collection-react-2025
+   ```
+
+2. Start the backend:
+
+   ```bash
+   cd server
+   node server.js
+   ```
+
+   The API runs at `http://localhost:3030`.
+
+3. In a **second terminal**, start the frontend:
+   ```bash
+   cd client
+   npm install
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
+
+## Test Accounts
+
+| Role | Email          | Password |
+| ---- | -------------- | -------- |
+| User | `peter@abv.bg` | `123456` |
+
+You can also register your own account.
+
+## Project Structure
+
+```
+games-collection-react-2025/
+├── client/   # React + Vite frontend
+└── server/   # SoftUni practice server (REST API)
+```
